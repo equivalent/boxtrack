@@ -1,4 +1,6 @@
-<%= form_with(model: item) do |form| %>
+<%= form_with(model: item, class: "box") do |form| %>
+  <%= form.hidden_field :box_id %>
+
   <% if item.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -9,16 +11,18 @@
         <% end %>
       </ul>
     </div>
+
+    <%= link_to "back to box", box_path(item.box) %>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="field">
+    <%= form.label :title, class: "label is-hidden" %>
+    <%= form.text_field :title, class: "input", placeholder: "Topanky" %>
   </div>
 
-  <%= form.hidden_field :box_id %>
+  <%= form.file_field :image %>
 
   <div>
-    <%= form.submit %>
+    <%= form.button class: "button" %>
   </div>
 <% end %>
